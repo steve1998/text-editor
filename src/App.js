@@ -1,11 +1,13 @@
 import React from 'react';
 
 import Home from './client/views/Home'
-import './App.css';
+
+import './App.scss';
 
 const App = () => {
   return (
     <div>
+      <Home />
     </div>
   );
 }
