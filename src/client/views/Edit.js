@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Editor, EditorState } from 'draft-js'
 
 import { Input, Button } from 'reactstrap'
+import '../styles/Edit.scss'
 
 const Edit = () => {
     const[editorState, setEditorState] = useState(() => 
@@ -10,7 +11,7 @@ const Edit = () => {
 
     return(
         <div>
-            <div className="border p-2 rounded-0">
+            <div className="border p-2 rounded-0 box">
                 <Editor editorState={editorState} onChange={setEditorState} />
             </div>
         </div>
