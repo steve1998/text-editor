@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Editor, EditorState } from 'draft-js'
 
-import { Input, Button } from 'reactstrap'
+import { Input, Row } from 'reactstrap'
 import '../styles/Edit.scss'
 
 const Edit = () => {
