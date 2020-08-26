@@ -36,11 +36,12 @@ const Home = () => {
     },[texts])
 
     const handleSetCurrentId = (currentId) => {
-        const result = texts.filter(text => text.id == currentId)
+        const result = texts.filter(text => text.id === currentId)
         setSelectedFile(result[0])
     }
 
     const handleSave = () => {
+        alert('Saved')
     }
     
     return(

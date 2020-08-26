@@ -1,12 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Editor, EditorState, ContentState } from 'draft-js'
 
 import '../styles/Edit.scss'
 
 const Edit = props => {
     const[editorState, setEditorState] = useState(() =>  
-        props.text ? EditorState.createWithContent(ContentState.createFromText(props.text)) : EditorState.createEmpty()
+        EditorState.createEmpty()
     )
+
+    useEffect(() => {
+        if(props.text) {
+            setEditorState(EditorState.push(editorState, ContentState.createFromText(props.text)))
+        }
+    /*eslint-disable*/
+    },[props])
+    /*eslint-enable*/
 
     return(
         <div>
