@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { Editor, EditorState } from 'draft-js'
+import React, { useState } from 'react'
+import { Editor, EditorState, ContentState } from 'draft-js'
 
-import { Input, Row } from 'reactstrap'
 import '../styles/Edit.scss'
 
-const Edit = () => {
-    const[editorState, setEditorState] = useState(() => 
-        EditorState.createEmpty()
+const Edit = props => {
+    const[editorState, setEditorState] = useState(() =>  
+        props.text ? EditorState.createWithContent(ContentState.createFromText(props.text)) : EditorState.createEmpty()
     )
 
     return(
