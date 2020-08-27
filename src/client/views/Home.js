@@ -28,6 +28,7 @@ let testFiles = [
 const Home = () => {
     const[texts, setTexts] = useState([])
     const[selectedFile, setSelectedFile] = useState(null)
+    const[title, setTitle] = useState(null)
 
     useEffect(() => {
         setTexts(testFiles)
@@ -37,17 +38,31 @@ const Home = () => {
         setSelectedFile(texts[0]) 
     },[texts])
 
+    useEffect(() => {
+        if(selectedFile) {
+            setTitle(selectedFile.fileName)
+        }
+    },[selectedFile])
+
     const handleSetCurrentId = (currentId) => {
         const result = texts.filter(text => text.id === currentId)
         setSelectedFile(result[0])
     }
 
-    const handleSave = () => {
+    const handleAdd = () => {
+        setSelectedFile("")
+    }
+
+    const handleTitleChange = (value) => {
+        setTitle(value)
+    }
+
+    const handleSave = (fileName, text) => {
         alert('Saved')
     }
     
     return(
-        <div>
+        <div className="main">
             <Container className="py-4">
                 <Row className="py-4 align-items-center">
                     {
@@ -57,16 +72,16 @@ const Home = () => {
                             )
                         })
                     }
-                    <div className="icon">
-                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
-                            <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+                    <div className="icon" onClick={handleAdd}>
+                        <svg width="2em" height="2em" viewBox="0 0 16 16" className="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                            <path fillRule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
                         </svg>
                     </div>   
                 </Row>
                 <Row>
                     {
-                        texts.length > 0 && selectedFile ? <h1>{selectedFile.fileName}</h1> : null
+                        texts.length > 0 ? <input className="title" onChange={(event) => {handleTitleChange(event.target.value)}} value={title}></input> : null
                     }
                 </Row>
                 {
