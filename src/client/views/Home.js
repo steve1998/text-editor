@@ -28,7 +28,7 @@ let testFiles = [
 const Home = () => {
     const[texts, setTexts] = useState([])
     const[selectedFile, setSelectedFile] = useState(null)
-    const[title, setTitle] = useState(null)
+    const[title, setTitle] = useState("")
 
     useEffect(() => {
         setTexts(testFiles)
