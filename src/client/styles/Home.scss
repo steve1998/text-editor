@@ -1,7 +1,19 @@
+@import './Fonts.scss';
+
+.main {
+    font-family: $Poppins;
+}
+
 .icon {
     cursor: pointer;
 }
 
 .icon:hover {
     opacity: 0.7;
+}
+
+.title {
+    border: none;
+    font-weight: $semibold;
+    font-size: 64px;
 }
