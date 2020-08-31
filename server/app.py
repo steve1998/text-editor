@@ -25,7 +25,7 @@ def home():
     return app.send_static_file('index.html')
 
 # Routes
-@app.route("/files", methods=['GET'])
+@app.route('/files', methods=['GET'])
 def get_files():
     files_collection = db['files']
     output = []
@@ -34,6 +34,15 @@ def get_files():
         output.append({'id': document['id'], 'fileName': document['fileName'], 'text': document['text']})
 
     return jsonify(output)
+
+@app.route('/files', methods=['POST'])
+def update_files(): 
+    files_collection = db['files']
+    
+    for document in files_collection.find():
+        print(document)
+        
+    return 0
 
 if __name__ == "__main__":
     app.run()
