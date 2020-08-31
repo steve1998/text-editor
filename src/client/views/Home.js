@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { fetchFiles } from '../services/fetchAPI'
+
 import Edit from './Edit'
 import File from '../components/File'
 
@@ -31,7 +33,11 @@ const Home = () => {
     const[title, setTitle] = useState("")
 
     useEffect(() => {
-        setTexts(testFiles)
+        // Intialize app with files from database
+        fetchFiles()
+        .then(res => {
+            setTexts(res)
+        })    
     }, [])
 
     useEffect(() => {
@@ -66,11 +72,11 @@ const Home = () => {
             <Container className="py-4">
                 <Row className="py-4 align-items-center">
                     {
-                        texts.map(text => {
+                        texts.length > 0 ? texts.map(text => {
                             return(
                                 <File key={text.id} eventHandler={handleSetCurrentId} file={text} />
                             )
-                        })
+                        }) : null
                     }
                     <div className="icon" onClick={handleAdd}>
                         <svg width="2em" height="2em" viewBox="0 0 16 16" className="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -81,7 +87,7 @@ const Home = () => {
                 </Row>
                 <Row>
                     {
-                        texts.length > 0 ? <input className="title" onChange={(event) => {handleTitleChange(event.target.value)}} value={title}></input> : null
+                        texts && texts.length > 0 ? <input className="title" onChange={(event) => {handleTitleChange(event.target.value)}} value={title}></input> : null
                     }
                 </Row>
                 {
