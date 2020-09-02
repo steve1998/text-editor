@@ -14,7 +14,7 @@ export const fetchFiles = () => {
     })
 }
 
-export const updateFile = (id, title, text) => {
+export const updateFile = async (id, title, text) => {
     let file = {
         id: id, 
         fileName: title, 
@@ -24,6 +24,7 @@ export const updateFile = (id, title, text) => {
     return axios.post(FILES_URI, file)
     .then(res => {
         console.log('POST: ', res)
+        return res
     })
     .catch(err => {
         console.log('POST: ', err)

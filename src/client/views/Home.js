@@ -52,6 +52,14 @@ const Home = () => {
 
     const handleSave = () => {
         updateFile(selectedFile.id, title, text)
+        .then(res => {
+            if(res.status === 200) {
+                fetchFiles()
+                .then(res => {
+                    setTexts(res)
+                })
+            }
+        })
     }
     
     return(
