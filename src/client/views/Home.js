@@ -14,6 +14,7 @@ const Home = () => {
     const[text, setText] = useState(null)
     const[selectedFile, setSelectedFile] = useState(null)
     const[title, setTitle] = useState("")
+    const[id, setId] = useState(0)
 
     useEffect(() => {
         // Intialize app with files from database
@@ -24,8 +25,23 @@ const Home = () => {
     }, [])
 
     useEffect(() => {
-        setSelectedFile(texts[0]) 
-    },[texts])
+        console.log(texts)
+        console.log(id)
+        setSelectedFile(texts[id])
+    },[texts, id])
+
+    useEffect(() => {
+        setTexts([
+            ...texts,
+            {
+                id: id,
+                fileName: '',
+                text: ''
+            }
+        ])
+    /*eslint-disable*/
+    }, [id])
+    /*eslint-enable*/
 
     useEffect(() => {
         if(selectedFile) {
@@ -39,7 +55,8 @@ const Home = () => {
     }
 
     const handleAdd = () => {
-        setSelectedFile("")
+        let newId = texts.length
+        setId(newId)
     }
 
     const handleTitleChange = (value) => {

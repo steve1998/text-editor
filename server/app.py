@@ -19,6 +19,7 @@ client_string = 'mongodb+srv://' + db_username + ':' + db_password + '@' + db_cl
 client = pymongo.MongoClient(client_string)
 
 db = client['text-editor']
+length_of_files = 0
 
 @app.route("/")
 def home():
@@ -29,25 +30,38 @@ def home():
 def get_files():
     files_collection = db['files']
     output = []
+    global length_of_files
 
     for document in files_collection.find():
         output.append({'id': document['id'], 'fileName': document['fileName'], 'text': document['text']})
+
+    length_of_files = len(output)
 
     return jsonify(output)
 
 @app.route('/files', methods=['POST'])
 def update_files(): 
     data = request.json
+    global length_of_files
 
     files_collection = db['files']
-    
-    files_collection.update_one(
-        {'id': 0},
-        {'$set': {
-            'fileName': data['fileName'],
-            'text': data['text']
-        }}
-    )
+
+    if data['id'] > length_of_files - 1:
+        files_collection.insert(
+            {
+                'id': data['id'],
+                'fileName': data['fileName'],
+                'text': data['text']
+            }
+        )
+    else:
+        files_collection.update_one(
+            {'id': data['id']},
+            {'$set': {
+                'fileName': data['fileName'],
+                'text': data['text']
+            }}
+        )
         
     return "Database Updated"
 
