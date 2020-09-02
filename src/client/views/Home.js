@@ -9,24 +9,6 @@ import { Container, Button, Row } from 'reactstrap'
 
 import '../styles/Home.scss'
 
-let testFiles = [
-    {
-        id: 0,
-        fileName: "Diary",
-        text: "Hello There! This is a test text"
-    },
-    {
-        id: 1,
-        fileName: "Study Schedule",
-        text: "Happy birthday!"
-    },
-    {
-        id: 2,
-        fileName: "List of Contacts",
-        text: "Damnit"
-    },
-]
-
 const Home = () => {
     const[texts, setTexts] = useState([])
     const[text, setText] = useState(null)
