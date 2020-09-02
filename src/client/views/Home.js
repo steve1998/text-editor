@@ -29,6 +29,7 @@ let testFiles = [
 
 const Home = () => {
     const[texts, setTexts] = useState([])
+    const[text, setText] = useState(null)
     const[selectedFile, setSelectedFile] = useState(null)
     const[title, setTitle] = useState("")
 
@@ -63,8 +64,13 @@ const Home = () => {
         setTitle(value)
     }
 
-    const handleSave = (fileName, text) => {
-        alert('Saved')
+    const handleTextChange = (txt) => {
+        setText(txt)
+    }
+
+    const handleSave = () => {
+        console.log(title)
+        console.log(text)
     }
     
     return(
@@ -91,7 +97,7 @@ const Home = () => {
                     }
                 </Row>
                 {
-                    selectedFile ? <Edit text={selectedFile.text} /> : <Edit text={null} />
+                    selectedFile ? <Edit text={selectedFile.text} save={handleTextChange}/> : <Edit text={""} save={handleTextChange}/>
                 }
                 <Row className ="pt-2 justify-content-end pr-3">
                     <Button className="rounded-0" onClick={handleSave}>Save</Button>
