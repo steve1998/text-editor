@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request
 from os import environ
 import pymongo
 
@@ -37,12 +37,19 @@ def get_files():
 
 @app.route('/files', methods=['POST'])
 def update_files(): 
+    data = request.json
+
     files_collection = db['files']
     
-    for document in files_collection.find():
-        print(document)
+    files_collection.update_one(
+        {'id': 0},
+        {'$set': {
+            'fileName': data['fileName'],
+            'text': data['text']
+        }}
+    )
         
-    return 0
+    return "Database Updated"
 
 if __name__ == "__main__":
     app.run()
