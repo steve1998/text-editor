@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { fetchFiles } from '../services/fetchAPI'
+import { fetchFiles, updateFile } from '../services/fetchAPI'
 
 import Edit from './Edit'
 import File from '../components/File'
@@ -51,8 +51,7 @@ const Home = () => {
     }
 
     const handleSave = () => {
-        console.log(title)
-        console.log(text)
+        updateFile(selectedFile.id, title, text)
     }
     
     return(

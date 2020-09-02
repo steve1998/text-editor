@@ -9,7 +9,23 @@ export const fetchFiles = () => {
         let result = res.data
         return result
     })
-    .catch(error => {
-        console.log('GET error: ', error)
+    .catch(err => {
+        console.log('GET: ', err)
+    })
+}
+
+export const updateFile = (id, title, text) => {
+    let file = {
+        id: id, 
+        fileName: title, 
+        text: text
+    }
+
+    return axios.post(FILES_URI, file)
+    .then(res => {
+        console.log('POST: ', res)
+    })
+    .catch(err => {
+        console.log('POST: ', err)
     })
 }
