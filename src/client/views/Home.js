@@ -100,7 +100,10 @@ const Home = () => {
     return(
         <div className="main">
             <Container className="py-4">
-                <Row className="py-4 align-items-center">
+                <Row className="py-4">
+                    <h1 className="brand">bsic <span className="subtitle">text editor</span></h1>
+                </Row>
+                <Row className="py-2 align-items-center">
                     {
                         texts.length > 0 ? texts.map(text => {
                             return(
@@ -127,6 +130,9 @@ const Home = () => {
                     <Button color="primary" className="rounded-0" onClick={handleSave}>Save</Button>
                     <Button color="danger" className="rounded-0 ml-2" onClick={handleDelete}>Delete</Button>
                 </Row>
+                <footer className="footer">
+                    <p>Created with React and Flask. <a target="_blank" rel="noopener noreferrer" href="https://github.com/steve1998">GitHub</a></p>
+                </footer>
             </Container>
         </div>
     )
