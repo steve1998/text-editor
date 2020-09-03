@@ -11,6 +11,8 @@ Set up your environment for this project as follows:
 - `NO_SQL_USER = <your mongodb cluster username>`
 - `NO_SQL_PASS = <your mongodb cluster password>`
 - `NO_SQL_CLUSTER_URL = <your mongodb cluster url>`
+
+You can do this by setting up a script (bash, pshell, etc.) depending on your system to set the environment variables.
 Future plans include having a user interface for the user to connect to MongoDB, and potentially support a working authentication system.
 
 ### Deployment
