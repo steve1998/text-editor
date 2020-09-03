@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid'
 
-import { fetchFiles, updateFile } from '../services/fetchAPI'
+import { fetchFiles, updateFile, deleteFile } from '../services/fetchAPI'
 
 import Edit from './Edit'
 import File from '../components/File'
@@ -13,7 +14,7 @@ const Home = () => {
     const[texts, setTexts] = useState([])
     const[text, setText] = useState(null)
     const[selectedFile, setSelectedFile] = useState(null)
-    const[title, setTitle] = useState("")
+    const[title, setTitle] = useState('')
     const[id, setId] = useState(0)
 
     useEffect(() => {
@@ -25,20 +26,25 @@ const Home = () => {
     }, [])
 
     useEffect(() => {
-        console.log(texts)
-        console.log(id)
-        setSelectedFile(texts[id])
-    },[texts, id])
+        if(texts.length > 0) {
+            setSelectedFile(texts[0])
+        }
+    /*eslint-disable*/
+    },[])
+    /*eslint-enable*/
 
     useEffect(() => {
+        let file =  {
+            id: id,
+            fileName: 'New Document',
+            text: ''
+        }
+
         setTexts([
             ...texts,
-            {
-                id: id,
-                fileName: '',
-                text: ''
-            }
+            file
         ])
+        setSelectedFile(file)
     /*eslint-disable*/
     }, [id])
     /*eslint-enable*/
@@ -55,7 +61,7 @@ const Home = () => {
     }
 
     const handleAdd = () => {
-        let newId = texts.length
+        let newId = uuidv4()
         setId(newId)
     }
 
@@ -69,6 +75,18 @@ const Home = () => {
 
     const handleSave = () => {
         updateFile(selectedFile.id, title, text)
+        .then(res => {
+            if(res.status === 200) {
+                fetchFiles()
+                .then(res => {
+                    setTexts(res)
+                })
+            }
+        })
+    }
+
+    const handleDelete = () => {
+        deleteFile(selectedFile.id)
         .then(res => {
             if(res.status === 200) {
                 fetchFiles()
@@ -106,7 +124,8 @@ const Home = () => {
                     selectedFile ? <Edit text={selectedFile.text} save={handleTextChange}/> : <Edit text={""} save={handleTextChange}/>
                 }
                 <Row className ="pt-2 justify-content-end pr-3">
-                    <Button className="rounded-0" onClick={handleSave}>Save</Button>
+                    <Button color="primary" className="rounded-0" onClick={handleSave}>Save</Button>
+                    <Button color="danger" className="rounded-0 ml-2" onClick={handleDelete}>Delete</Button>
                 </Row>
             </Container>
         </div>

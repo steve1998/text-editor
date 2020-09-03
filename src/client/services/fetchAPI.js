@@ -30,3 +30,20 @@ export const updateFile = async (id, title, text) => {
         console.log('POST: ', err)
     })
 }
+
+export const deleteFile = async id => {
+    return axios({
+        url: FILES_URI, 
+        method: 'delete',
+        data: {
+            id: id
+        }
+    })
+    .then(res => {
+        console.log('DELETE: ', res)
+        return res
+    })
+    .catch(err => {
+        console.log('DELETE: ', err)
+    })
+}
