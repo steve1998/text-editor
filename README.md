@@ -25,3 +25,6 @@ Coming soon.
 - uuid
 - node-sass
 - reactstrap
+
+### Preview
+![Home](https://raw.githubusercontent.com/steve1998/text-editor/master/screenshots/bsic.png)
