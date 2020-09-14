@@ -16,9 +16,6 @@ You can do this by setting up a script (bash, pshell, etc.) depending on your sy
 You also might need to modify the script `yarn start-backend` to how Flask is set up on your system. Currently, this supports `venv` for Windows.
 Future plans include having a user interface for the user to connect to MongoDB, and potentially support a working authentication system.
 
-### Deployment
-Coming soon.
-
 ### Plugins Used
 - axios
 - boostrap
