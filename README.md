@@ -15,12 +15,5 @@ Set up your environment for this project as follows:
 You can do this by setting up a script (bash, pshell, etc.) depending on your system to set the environment variables.
 You also might need to modify the script `yarn start-backend` to how Flask is set up on your system. Currently, this supports `venv` for Windows.
 
-### Plugins Used
-- axios
-- boostrap
-- uuid
-- node-sass
-- reactstrap
-
 ### Preview
 ![Home](https://raw.githubusercontent.com/steve1998/text-editor/master/screenshots/bsic.png)
