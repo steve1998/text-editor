@@ -1,4 +1,4 @@
-# bsic text editor
+# bsic Text Editor
 
 ### Description
 A simple text editor using Draft.js, React, Flask, and MongoDB Atlas.
